@@ -17,11 +17,11 @@ $svgPath = $icons[$icon] ?? $icons['home'];
 <a href="{{ $href }}"
    class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200
           {{ $active
-              ? 'bg-gradient-to-r from-red-500/20 to-orange-500/10 text-red-400 shadow-sm shadow-red-500/10'
-              : 'text-gray-400 hover:text-white hover:bg-white/5' }}">
-    <svg class="w-5 h-5 shrink-0 {{ $active ? 'text-red-400' : '' }}" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">{!! $svgPath !!}</svg>
+              ? 'bg-red-50 dark:bg-red-500/10 text-red-600 dark:text-red-400 shadow-sm border border-red-100 dark:border-transparent'
+              : 'text-gray-600 dark:text-gray-400 hover:text-red-600 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/5' }}">
+    <svg class="w-5 h-5 shrink-0 {{ $active ? 'text-red-600 dark:text-red-400' : '' }}" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">{!! $svgPath !!}</svg>
     <span>{{ $slot }}</span>
     @if($active)
-        <div class="ml-auto w-1.5 h-1.5 rounded-full bg-red-400"></div>
+        <div class="ml-auto w-1.5 h-1.5 rounded-full bg-red-600 dark:bg-red-400"></div>
     @endif
 </a>

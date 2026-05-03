@@ -1,24 +1,22 @@
 import ApexCharts from 'apexcharts';
 window.ApexCharts = ApexCharts;
 
-// Dark mode toggle
-document.addEventListener('DOMContentLoaded', () => {
-    const toggle = document.getElementById('darkModeToggle');
+// 1. Dark Mode Logic
+(function() {
     const html = document.documentElement;
-
-    // Check stored preference
-    if (localStorage.getItem('darkMode') === 'true') {
-        html.classList.add('dark');
-    }
+    const toggle = document.getElementById('darkModeToggle');
 
     if (toggle) {
         toggle.addEventListener('click', () => {
-            html.classList.toggle('dark');
-            localStorage.setItem('darkMode', html.classList.contains('dark'));
+            const isDark = html.classList.toggle('dark');
+            localStorage.setItem('darkMode', isDark);
+            console.log('Dark mode toggled:', isDark);
         });
     }
+})();
 
-    // Mobile sidebar toggle
+// 2. Sidebar & Navigation Logic
+document.addEventListener('DOMContentLoaded', () => {
     const sidebarToggle = document.getElementById('sidebarToggle');
     const sidebar = document.getElementById('sidebar');
     const sidebarOverlay = document.getElementById('sidebarOverlay');

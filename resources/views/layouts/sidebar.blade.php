@@ -1,16 +1,16 @@
 @php $user = (object) session('admin_user'); @endphp
 
-<aside id="sidebar" class="fixed top-0 left-0 z-50 w-72 h-screen bg-gradient-to-b from-[#1a1a2e] to-[#16213e] text-white flex flex-col transition-transform duration-300 -translate-x-full lg:translate-x-0 shadow-2xl">
+<aside id="sidebar" class="fixed top-0 left-0 z-50 w-72 h-screen bg-white dark:bg-gradient-to-b dark:from-[#1a1a2e] dark:to-[#16213e] text-slate-800 dark:text-white flex flex-col transition-all duration-300 border-r border-gray-200 dark:border-none -translate-x-full lg:translate-x-0 shadow-xl dark:shadow-2xl">
 
     {{-- Logo --}}
-    <div class="p-6 border-b border-white/10">
+    <div class="p-6 border-b border-gray-100 dark:border-white/10">
         <a href="{{ $user->role === 'manager' ? route('manager.dashboard') : route('admin.dashboard') }}" class="flex items-center gap-3 group">
             <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center shadow-lg shadow-red-500/30 group-hover:scale-105 transition-transform">
                 <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
             </div>
             <div>
                 <h1 class="text-xl font-bold tracking-tight">Whoossh</h1>
-                <p class="text-xs text-gray-400 font-medium">Dashboard {{ ucfirst($user->role) }}</p>
+                <p class="text-xs text-gray-500 dark:text-gray-400 font-medium">Dashboard {{ ucfirst($user->role) }}</p>
             </div>
         </a>
     </div>
@@ -19,7 +19,7 @@
     <nav class="flex-1 overflow-y-auto py-4 px-3 space-y-1">
 
         @if($user->role === 'admin')
-            <p class="px-4 pt-4 pb-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">Overview</p>
+            <p class="px-4 pt-4 pb-2 text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider">Overview</p>
             <x-sidebar-link href="{{ route('admin.dashboard') }}" :active="request()->routeIs('admin.dashboard')" icon="home">
                 Dashboard
             </x-sidebar-link>
@@ -48,7 +48,7 @@
         @endif
 
         @if($user->role === 'manager')
-            <p class="px-4 pt-4 pb-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">Analytics</p>
+            <p class="px-4 pt-4 pb-2 text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider">Analytics</p>
             <x-sidebar-link href="{{ route('manager.dashboard') }}" :active="request()->routeIs('manager.dashboard')" icon="home">
                 Dashboard
             </x-sidebar-link>
@@ -64,14 +64,14 @@
     </nav>
 
     {{-- User Card --}}
-    <div class="p-4 border-t border-white/10">
-        <div class="flex items-center gap-3 p-3 rounded-xl bg-white/5 hover:bg-white/10 transition-colors">
+    <div class="p-4 border-t border-gray-100 dark:border-white/10">
+        <div class="flex items-center gap-3 p-3 rounded-xl bg-gray-50 dark:bg-white/5 hover:bg-gray-100 dark:hover:bg-white/10 transition-colors border border-gray-100 dark:border-transparent">
             <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-red-400 to-orange-500 flex items-center justify-center text-sm font-bold text-white shadow-lg">
                 {{ strtoupper(substr($user->name, 0, 2)) }}
             </div>
             <div class="flex-1 min-w-0">
                 <p class="text-sm font-semibold truncate">{{ $user->name }}</p>
-                <p class="text-xs text-gray-400 truncate">{{ ucfirst($user->role) }}</p>
+                <p class="text-xs text-gray-500 dark:text-gray-400 truncate">{{ ucfirst($user->role) }}</p>
             </div>
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
