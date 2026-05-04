@@ -1,7 +1,13 @@
 <x-layouts.app :title="'User Management'">
-    <div class="mb-6">
-        <h1 class="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">Mobile App Users</h1>
-        <p class="text-sm text-gray-500 mt-1">View registered users from the Whoosh mobile application</p>
+    <div class="mb-6 flex items-start justify-between">
+        <div>
+            <h1 class="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">Mobile App Users</h1>
+            <p class="text-sm text-gray-500 mt-1">View registered users from the Whoosh mobile application</p>
+        </div>
+        <a href="{{ route('admin.users.create') }}" class="px-5 py-2.5 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg shadow-sm transition-colors text-sm flex items-center gap-2">
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+            Add User
+        </a>
     </div>
     <div class="mb-6">
         <form method="GET" class="relative max-w-md">
@@ -37,6 +43,8 @@
                             <div class="flex items-center justify-end overflow">
                                 <x-table-actions-dropdown 
                                     :viewRoute="route('admin.users.show', $user->id)"
+                                    :editRoute="route('admin.users.edit', $user->id)"
+                                    :deleteRoute="route('admin.users.destroy', $user->id)"
                                 />
                             </div>
                         </td>
