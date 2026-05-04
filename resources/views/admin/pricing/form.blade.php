@@ -45,18 +45,24 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div>
                         <label class="block text-sm font-semibold text-slate-700 dark:text-gray-300 mb-2">Base Price (Rp) <span class="text-red-500">*</span></label>
-                        <input type="number" name="base_price" value="{{ old('base_price', $pricing->base_price ?? 0) }}" required min="0"
-                            class="w-full px-4 py-3 bg-gray-50 dark:bg-[#0f0f23] border border-gray-200 dark:border-white/10 rounded-lg text-sm focus:outline-none focus:border-red-600 focus:ring-1 focus:ring-red-600 transition-colors text-slate-900 dark:text-white">
+                        <input type="number" name="base_price" value="{{ old('base_price', $pricing->base_price ?? 0) }}" required min="0" step="1"
+                            class="w-full px-4 py-3 bg-gray-50 dark:bg-[#0f0f23] border border-gray-200 dark:border-white/10 rounded-lg text-sm focus:outline-none focus:border-red-600 focus:ring-1 focus:ring-red-600 transition-colors text-slate-900 dark:text-white"
+                            oninput="this.value = this.value.replace(/[^0-9]/g, '')" 
+                            onpaste="setTimeout(() => this.value = this.value.replace(/[^0-9]/g, ''), 0)">
                     </div>
                     <div>
                         <label class="block text-sm font-semibold text-slate-700 dark:text-gray-300 mb-2">Peak Price (Rp) <span class="text-red-500">*</span></label>
-                        <input type="number" name="peak_price" value="{{ old('peak_price', $pricing->peak_price ?? 0) }}" required min="0"
-                            class="w-full px-4 py-3 bg-gray-50 dark:bg-[#0f0f23] border border-gray-200 dark:border-white/10 rounded-lg text-sm focus:outline-none focus:border-red-600 focus:ring-1 focus:ring-red-600 transition-colors text-slate-900 dark:text-white">
+                        <input type="number" name="peak_price" value="{{ old('peak_price', $pricing->peak_price ?? 0) }}" required min="0" step="1"
+                            class="w-full px-4 py-3 bg-gray-50 dark:bg-[#0f0f23] border border-gray-200 dark:border-white/10 rounded-lg text-sm focus:outline-none focus:border-red-600 focus:ring-1 focus:ring-red-600 transition-colors text-slate-900 dark:text-white"
+                            oninput="this.value = this.value.replace(/[^0-9]/g, '')" 
+                            onpaste="setTimeout(() => this.value = this.value.replace(/[^0-9]/g, ''), 0)">
                     </div>
                     <div>
                         <label class="block text-sm font-semibold text-slate-700 dark:text-gray-300 mb-2">Off-Peak (Rp) <span class="text-red-500">*</span></label>
-                        <input type="number" name="off_peak_price" value="{{ old('off_peak_price', $pricing->off_peak_price ?? 0) }}" required min="0"
-                            class="w-full px-4 py-3 bg-gray-50 dark:bg-[#0f0f23] border border-gray-200 dark:border-white/10 rounded-lg text-sm focus:outline-none focus:border-red-600 focus:ring-1 focus:ring-red-600 transition-colors text-slate-900 dark:text-white">
+                        <input type="number" name="off_peak_price" value="{{ old('off_peak_price', $pricing->off_peak_price ?? 0) }}" required min="0" step="1"
+                            class="w-full px-4 py-3 bg-gray-50 dark:bg-[#0f0f23] border border-gray-200 dark:border-white/10 rounded-lg text-sm focus:outline-none focus:border-red-600 focus:ring-1 focus:ring-red-600 transition-colors text-slate-900 dark:text-white"
+                            oninput="this.value = this.value.replace(/[^0-9]/g, '')" 
+                            onpaste="setTimeout(() => this.value = this.value.replace(/[^0-9]/g, ''), 0)">
                     </div>
                 </div>
 
