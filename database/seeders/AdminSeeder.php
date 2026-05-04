@@ -13,14 +13,14 @@ class AdminSeeder extends Seeder
         $admins = [
             [
                 'name' => 'Super Admin',
-                'email' => 'admin@whoossh.id',
+                'email' => 'admin@whoosh.id',
                 'password' => Hash::make('admin123'),
                 'role' => 'admin',
                 'is_active' => 1,
             ],
             [
                 'name' => 'Manager Operasional',
-                'email' => 'manager@whoossh.id',
+                'email' => 'manager@whoosh.id',
                 'password' => Hash::make('manager123'),
                 'role' => 'manager',
                 'is_active' => 1,

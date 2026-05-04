@@ -1,6 +1,6 @@
 @php $user = (object) session('admin_user'); @endphp
 
-<header class="sticky top-0 z-30 bg-white/80 dark:bg-[#1a1a2e]/80 backdrop-blur-xl border-b border-gray-200/50 dark:border-white/5">
+<header class="sticky top-0 z-30 bg-white dark:bg-[#1a1a2e] border-b border-gray-100 dark:border-white/5">
     <div class="flex items-center justify-between h-16 px-4 md:px-6 lg:px-8">
         {{-- Left: Mobile menu + Breadcrumb --}}
         <div class="flex items-center gap-3">

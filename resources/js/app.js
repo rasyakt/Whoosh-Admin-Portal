@@ -1,6 +1,10 @@
 import ApexCharts from 'apexcharts';
 window.ApexCharts = ApexCharts;
 
+import Alpine from 'alpinejs';
+window.Alpine = Alpine;
+Alpine.start();
+
 // 1. Dark Mode Logic
 (function() {
     const html = document.documentElement;

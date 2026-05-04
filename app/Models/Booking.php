@@ -29,6 +29,10 @@ class Booking extends Model
         'is_used',
         'is_paid',
         'is_cancelled',
+        'refund_amount',
+        'bank_name',
+        'account_no',
+        'account_holder',
         'booking_timestamp',
     ];
 
@@ -38,6 +42,7 @@ class Booking extends Model
             'is_used' => 'boolean',
             'is_paid' => 'boolean',
             'is_cancelled' => 'boolean',
+            'refund_amount' => 'integer',
             'booking_timestamp' => 'integer',
         ];
     }

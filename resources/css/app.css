@@ -23,3 +23,71 @@
     --color-text-muted: #64748b;
     --color-border: #e2e8f0;
 }
+
+/* Custom scrollbar untuk horizontal scroll */
+.overflow-x-auto {
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 #f1f5f9;
+}
+
+.overflow-x-auto::-webkit-scrollbar {
+    height: 10px;
+}
+
+.overflow-x-auto::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 5px;
+}
+
+.overflow-x-auto::-webkit-scrollbar-thumb {
+    background-color: #cbd5e1;
+    border-radius: 5px;
+    border: 2px solid #f1f5f9;
+}
+
+.overflow-x-auto::-webkit-scrollbar-thumb:hover {
+    background-color: #94a3b8;
+}
+
+/* Dark mode scrollbar */
+.dark .overflow-x-auto {
+    scrollbar-color: #475569 #1e293b;
+}
+
+.dark .overflow-x-auto::-webkit-scrollbar-track {
+    background: #1e293b;
+}
+
+.dark .overflow-x-auto::-webkit-scrollbar-thumb {
+    background-color: #475569;
+    border-color: #1e293b;
+}
+
+.dark .overflow-x-auto::-webkit-scrollbar-thumb:hover {
+    background-color: #64748b;
+}
+
+/* Ensure table cells with dropdowns don't clip */
+td:has(.relative) {
+    position: relative;
+    overflow: visible !important;
+}
+
+tr:has(.relative) {
+    position: relative;
+    overflow: visible !important;
+}
+
+tbody:has(.relative) {
+    overflow: visible !important;
+}
+
+table:has(.relative) {
+    overflow: visible !important;
+}
+
+/* Stat card number formatting */
+.stat-value {
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+}

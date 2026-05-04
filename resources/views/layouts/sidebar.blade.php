@@ -1,16 +1,21 @@
 @php $user = (object) session('admin_user'); @endphp
 
-<aside id="sidebar" class="fixed top-0 left-0 z-50 w-72 h-screen bg-white dark:bg-gradient-to-b dark:from-[#1a1a2e] dark:to-[#16213e] text-slate-800 dark:text-white flex flex-col transition-all duration-300 border-r border-gray-200 dark:border-none -translate-x-full lg:translate-x-0 shadow-xl dark:shadow-2xl">
+<aside id="sidebar" class="fixed top-0 left-0 z-50 w-72 h-screen bg-white dark:bg-[#1a1a2e] text-slate-800 dark:text-gray-200 flex flex-col transition-all duration-300 border-r border-gray-100 dark:border-white/5 -translate-x-full lg:translate-x-0 shadow-sm">
 
     {{-- Logo --}}
-    <div class="p-6 border-b border-gray-100 dark:border-white/10">
-        <a href="{{ $user->role === 'manager' ? route('manager.dashboard') : route('admin.dashboard') }}" class="flex items-center gap-3 group">
-            <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center shadow-lg shadow-red-500/30 group-hover:scale-105 transition-transform">
-                <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+    <div class="p-6 border-b border-gray-100 dark:border-white/5">
+        <a href="{{ $user->role === 'manager' ? route('manager.dashboard') : route('admin.dashboard') }}" class="flex items-center gap-4 group">
+            <div class="relative">
+                <div class="w-12 h-12 rounded-xl bg-red-600 flex items-center justify-center shadow-sm group-hover:bg-red-700 transition-colors duration-300">
+                    <svg class="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 13h18M5 17h14m-12-8h10M7 5h6a2 2 0 012 2v10a2 2 0 01-2 2H7a2 2 0 01-2-2V7a2 2 0 012-2z" />
+                    </svg>
+                </div>
+                <div class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-orange-500 border-2 border-white dark:border-[#1a1a2e]"></div>
             </div>
             <div>
-                <h1 class="text-xl font-bold tracking-tight">Whoossh</h1>
-                <p class="text-xs text-gray-500 dark:text-gray-400 font-medium">Dashboard {{ ucfirst($user->role) }}</p>
+                <h1 class="text-xl font-bold tracking-tight text-slate-900 dark:text-white leading-none">WHOOSH</h1>
+                <p class="text-[10px] text-gray-500 dark:text-gray-500 font-bold uppercase tracking-widest mt-1">Management</p>
             </div>
         </a>
     </div>

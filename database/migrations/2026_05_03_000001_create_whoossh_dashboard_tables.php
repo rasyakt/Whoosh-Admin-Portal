@@ -28,6 +28,22 @@ return new class extends Migration
             END
         ");
 
+        // Create stations table first (needed for schedules foreign keys)
+        DB::connection('sqlsrv')->statement("
+            IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'stations')
+            BEGIN
+                CREATE TABLE stations (
+                    id INT IDENTITY(1,1) PRIMARY KEY,
+                    name NVARCHAR(100) NOT NULL,
+                    code NVARCHAR(10) NOT NULL UNIQUE,
+                    city NVARCHAR(100) NOT NULL,
+                    location NVARCHAR(200) NULL,
+                    facilities NVARCHAR(500) NULL,
+                    is_active BIT NOT NULL DEFAULT 1
+                );
+            END
+        ");
+
         // Create trains table
         DB::connection('sqlsrv')->statement("
             IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'trains')
@@ -84,24 +100,33 @@ return new class extends Migration
 
         // Add is_cancelled column to bookings if not exists
         DB::connection('sqlsrv')->statement("
-            IF NOT EXISTS (SELECT * FROM sys.columns WHERE object_id = OBJECT_ID('bookings') AND name = 'is_cancelled')
+            IF EXISTS (SELECT * FROM sys.tables WHERE name = 'bookings')
             BEGIN
-                ALTER TABLE bookings ADD is_cancelled BIT NOT NULL DEFAULT 0;
+                IF NOT EXISTS (SELECT * FROM sys.columns WHERE object_id = OBJECT_ID('bookings') AND name = 'is_cancelled')
+                BEGIN
+                    ALTER TABLE bookings ADD is_cancelled BIT NOT NULL DEFAULT 0;
+                END
             END
         ");
 
-        // Add location and facilities to stations if not exists
+        // Update stations columns if table already exists (from previous migration)
         DB::connection('sqlsrv')->statement("
-            IF NOT EXISTS (SELECT * FROM sys.columns WHERE object_id = OBJECT_ID('stations') AND name = 'location')
+            IF EXISTS (SELECT * FROM sys.tables WHERE name = 'stations')
             BEGIN
-                ALTER TABLE stations ADD location NVARCHAR(200) NULL;
+                IF NOT EXISTS (SELECT * FROM sys.columns WHERE object_id = OBJECT_ID('stations') AND name = 'location')
+                BEGIN
+                    ALTER TABLE stations ADD location NVARCHAR(200) NULL;
+                END
             END
         ");
 
         DB::connection('sqlsrv')->statement("
-            IF NOT EXISTS (SELECT * FROM sys.columns WHERE object_id = OBJECT_ID('stations') AND name = 'facilities')
+            IF EXISTS (SELECT * FROM sys.tables WHERE name = 'stations')
             BEGIN
-                ALTER TABLE stations ADD facilities NVARCHAR(500) NULL;
+                IF NOT EXISTS (SELECT * FROM sys.columns WHERE object_id = OBJECT_ID('stations') AND name = 'facilities')
+                BEGIN
+                    ALTER TABLE stations ADD facilities NVARCHAR(500) NULL;
+                END
             END
         ");
     }
@@ -111,6 +136,7 @@ return new class extends Migration
         DB::connection('sqlsrv')->statement("IF OBJECT_ID('pricing_rules', 'U') IS NOT NULL DROP TABLE pricing_rules");
         DB::connection('sqlsrv')->statement("IF OBJECT_ID('schedules', 'U') IS NOT NULL DROP TABLE schedules");
         DB::connection('sqlsrv')->statement("IF OBJECT_ID('trains', 'U') IS NOT NULL DROP TABLE trains");
+        DB::connection('sqlsrv')->statement("IF OBJECT_ID('stations', 'U') IS NOT NULL DROP TABLE stations");
         DB::connection('sqlsrv')->statement("IF OBJECT_ID('admin_users', 'U') IS NOT NULL DROP TABLE admin_users");
     }
 };

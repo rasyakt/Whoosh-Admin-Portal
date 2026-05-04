@@ -1,20 +1,12 @@
 @props(['label', 'value', 'color' => 'blue', 'icon' => 'users'])
 
 @php
-$gradients = [
-    'blue' => 'from-blue-500 to-blue-600',
-    'emerald' => 'from-emerald-500 to-emerald-600',
-    'amber' => 'from-amber-500 to-orange-500',
-    'violet' => 'from-violet-500 to-purple-600',
-    'red' => 'from-red-500 to-red-600',
-];
-
-$shadows = [
-    'blue' => 'shadow-blue-500/20',
-    'emerald' => 'shadow-emerald-500/20',
-    'amber' => 'shadow-amber-500/20',
-    'violet' => 'shadow-violet-500/20',
-    'red' => 'shadow-red-500/20',
+$bgColors = [
+    'blue' => 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400',
+    'emerald' => 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400',
+    'amber' => 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400',
+    'violet' => 'bg-violet-100 text-violet-700 dark:bg-violet-900/30 dark:text-violet-400',
+    'red' => 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400',
 ];
 
 $icons = [
@@ -23,18 +15,18 @@ $icons = [
     'train' => '<path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>',
     'station' => '<path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>',
 ];
+
+// Determine font size based on value length - more aggressive scaling for single line
+$valueLength = strlen($value);
+$fontSize = $valueLength > 15 ? 'text-lg' : ($valueLength > 10 ? 'text-xl' : ($valueLength > 6 ? 'text-2xl' : 'text-3xl'));
 @endphp
 
-<div class="relative overflow-hidden bg-white dark:bg-[#1e1e3a] rounded-2xl border border-gray-200/50 dark:border-white/5 p-5 shadow-sm hover:shadow-md transition-shadow duration-300">
-    <div class="flex items-start justify-between">
-        <div>
-            <p class="text-sm font-medium text-gray-500 dark:text-gray-400">{{ $label }}</p>
-            <p class="text-2xl font-bold text-gray-800 dark:text-white mt-1">{{ $value }}</p>
+<div class="bg-white dark:bg-[#1a1a2e] rounded-xl border border-gray-200 dark:border-white/10 p-6 shadow-sm">
+    <div class="flex items-center gap-3 mb-3">
+        <div class="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 {{ $bgColors[$color] ?? $bgColors['blue'] }}">
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">{!! $icons[$icon] ?? $icons['users'] !!}</svg>
         </div>
-        <div class="w-12 h-12 rounded-2xl bg-gradient-to-br {{ $gradients[$color] }} flex items-center justify-center shadow-lg {{ $shadows[$color] }}">
-            <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">{!! $icons[$icon] ?? $icons['users'] !!}</svg>
-        </div>
+        <p class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">{{ $label }}</p>
     </div>
-    {{-- Decorative gradient --}}
-    <div class="absolute -bottom-4 -right-4 w-24 h-24 bg-gradient-to-br {{ $gradients[$color] }} opacity-5 rounded-full"></div>
+    <p class="stat-value {{ $fontSize }} font-bold text-slate-900 dark:text-white whitespace-nowrap">{{ $value }}</p>
 </div>
