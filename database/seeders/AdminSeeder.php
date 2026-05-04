@@ -12,7 +12,7 @@ class AdminSeeder extends Seeder
     {
         $admins = [
             [
-                'name' => 'Super Admin',
+                'name' => 'Admin',
                 'email' => 'admin@whoosh.id',
                 'password' => Hash::make('admin123'),
                 'role' => 'admin',

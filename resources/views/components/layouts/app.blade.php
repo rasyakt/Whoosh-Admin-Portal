@@ -7,6 +7,18 @@
     <title>{{ $title ?? 'Dashboard' }} — Whoosh</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    {{-- Inline script to prevent FOUC (Flash of Unstyled Content) --}}
+    <script>
+        // Apply dark mode immediately before page renders
+        (function() {
+            const isDarkMode = localStorage.getItem('darkMode') === 'true';
+            if (isDarkMode) {
+                document.documentElement.classList.add('dark');
+            }
+        })();
+    </script>
+    
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-[#f8f9fc] dark:bg-[#0f0f23] text-[#1e293b] dark:text-gray-200 min-h-screen font-sans antialiased">

@@ -12,21 +12,38 @@
 
     {{-- Left Side: Branding --}}
     <div class="hidden lg:flex w-1/2 bg-[#1a1a2e] flex-col justify-between p-12 relative overflow-hidden">
-        {{-- Decorative Pattern --}}
-        <div class="absolute inset-0 opacity-5" style="background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 24px 24px;"></div>
+        {{-- Background Image --}}
+        <div class="absolute inset-0 z-0">
+            <img src="{{ asset('img/whoosh_train_bg.png') }}" alt="Whoosh Train" class="w-full h-full object-cover opacity-50">
+            <div class="absolute inset-0 bg-gradient-to-tr from-[#1a1a2e] via-[#1a1a2e]/40 to-transparent"></div>
+        </div>
         
         <div class="relative z-10">
-            <div class="inline-flex items-center justify-center w-16 h-16 rounded-xl bg-red-600 mb-6">
-                <svg class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 13h18M5 17h14m-12-8h10M7 5h6a2 2 0 012 2v10a2 2 0 01-2 2H7a2 2 0 01-2-2V7a2 2 0 012-2z" />
-                </svg>
+            <img src="{{ asset('img/logo_white.png') }}" alt="Whoosh Logo" class="h-20 w-auto object-contain mb-5 transition-all hover:scale-105 duration-300">
+            
+            <div class="max-w-md">
+                <!-- <h1 class="text-5xl font-black text-white tracking-tighter leading-[0.95] mb-6 drop-shadow-2xl">
+                    ADVANCED <br>
+                    <span class="text-red-600">RAIL CONTROL</span>
+                </h1> -->
+                
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="h-1 w-10 bg-red-600 rounded-full"></div>
+                    <span class="text-xs font-bold text-gray-400 uppercase tracking-[0.3em]">Operational Excellence</span>
+                </div>
+
+                <p class="text-lg text-gray-300 leading-relaxed font-medium opacity-90">
+                    Empowering Indonesia's high-speed rail with precision management and real-time analytics.
+                </p>
             </div>
-            <h1 class="text-4xl font-black text-white tracking-tight mb-2">WHOOSH</h1>
-            <p class="text-lg text-gray-400 max-w-md leading-relaxed">High Speed Train Management System. Streamline your operations with our professional dashboard.</p>
         </div>
 
         <div class="relative z-10">
-            <p class="text-sm text-gray-500 font-medium uppercase tracking-widest">&copy; 2026 Whoosh Enterprise</p>
+            <div class="flex items-center gap-4 text-gray-500">
+                <span class="text-xs font-bold uppercase tracking-widest">&copy; 2026 Whoosh Enterprise</span>
+                <span class="h-1 w-1 rounded-full bg-gray-700"></span>
+                <span class="text-xs font-medium">v2.4.0</span>
+            </div>
         </div>
     </div>
 
@@ -35,17 +52,12 @@
         <div class="w-full max-w-md">
             {{-- Mobile Logo --}}
             <div class="lg:hidden mb-8 text-center">
-                <div class="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-red-600 mb-4">
-                    <svg class="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 13h18M5 17h14m-12-8h10M7 5h6a2 2 0 012 2v10a2 2 0 01-2 2H7a2 2 0 01-2-2V7a2 2 0 012-2z" />
-                    </svg>
-                </div>
-                <h1 class="text-3xl font-black text-slate-900 tracking-tight">WHOOSH</h1>
+                <img src="{{ asset('img/logo_whoosh.png') }}" alt="Whoosh Logo" class="h-16 w-auto object-contain mx-auto mb-4">
             </div>
 
             <div class="mb-10">
-                <h2 class="text-2xl font-bold text-slate-900 mb-2">Welcome Back</h2>
-                <p class="text-gray-500">Please enter your credentials to access the panel.</p>
+                <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight mb-2">Welcome Back</h2>
+                <p class="text-slate-500 font-medium opacity-80">Please enter your credentials to access the panel.</p>
             </div>
 
             @if($errors->any())
@@ -61,22 +73,48 @@
             <form method="POST" action="{{ route('login') }}" class="space-y-6">
                 @csrf
 
-                <div>
-                    <label class="block text-sm font-semibold text-slate-700 mb-2">Email Address</label>
-                    <input type="email" name="email" value="{{ old('email') }}" required autofocus
-                        class="w-full px-4 py-3 bg-white border border-gray-200 rounded-lg text-slate-900 placeholder-gray-400 focus:outline-none focus:border-red-600 focus:ring-1 focus:ring-red-600 transition-colors"
-                        placeholder="admin@whoosh.id">
+                <div class="space-y-2">
+                    <label class="block text-sm font-bold text-slate-700 ml-1">Email Address</label>
+                    <div class="relative group">
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400 group-focus-within:text-red-600 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                            </svg>
+                        </div>
+                        <input type="email" name="email" value="{{ old('email') }}" required autofocus
+                            class="w-full pl-11 pr-4 py-3.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder-slate-400 focus:outline-none focus:border-red-600 focus:ring-4 focus:ring-red-600/5 focus:bg-white transition-all"
+                            placeholder="admin@whoosh.id">
+                    </div>
                 </div>
 
-                <div>
-                    <label class="block text-sm font-semibold text-slate-700 mb-2">Password</label>
-                    <input type="password" name="password" required
-                        class="w-full px-4 py-3 bg-white border border-gray-200 rounded-lg text-slate-900 placeholder-gray-400 focus:outline-none focus:border-red-600 focus:ring-1 focus:ring-red-600 transition-colors"
-                        placeholder="••••••••">
+                <div class="space-y-2">
+                    <div class="flex items-center justify-between ml-1">
+                        <label class="block text-sm font-bold text-slate-700">Password</label>
+                    </div>
+                    <div class="relative group">
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400 group-focus-within:text-red-600 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                            </svg>
+                        </div>
+                        <input type="password" name="password" required
+                            class="w-full pl-11 pr-4 py-3.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder-slate-400 focus:outline-none focus:border-red-600 focus:ring-4 focus:ring-red-600/5 focus:bg-white transition-all"
+                            placeholder="••••••••">
+                    </div>
                 </div>
 
-                <button type="submit" class="w-full py-3.5 px-6 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-colors duration-200 shadow-sm">
-                    Sign In to Dashboard
+                <div class="flex items-center">
+                    <input id="remember_me" type="checkbox" name="remember" class="w-4 h-4 text-red-600 border-slate-300 rounded focus:ring-red-500">
+                    <label for="remember_me" class="ml-2 block text-sm text-slate-600 font-medium select-none">Stay signed in for 30 days</label>
+                </div>
+
+                <button type="submit" class="w-full group relative flex justify-center py-4 px-6 border border-transparent text-sm font-bold rounded-xl text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-all active:scale-[0.98] shadow-lg shadow-red-600/20">
+                    <!-- <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+                        <svg class="h-5 w-5 text-red-500 group-hover:text-red-400 transition-colors" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
+                        </svg>
+                    </span> -->
+                    Login
                 </button>
             </form>
 

@@ -3,7 +3,7 @@
     {{-- Stats Grid --}}
     <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 mb-8">
         <x-stat-card label="Total Users" :value="$stats['total_users']" color="blue" icon="users" />
-        <x-stat-card label="Total Revenue" :value="'Rp ' . number_format($stats['total_revenue'])" color="emerald" icon="revenue" />
+        <x-stat-card label="Total Revenue" :value="'Rp&nbsp;' . number_format($stats['total_revenue'])" color="emerald" icon="revenue" />
         <x-stat-card label="Active Trains" :value="$stats['active_trains']" color="amber" icon="train" />
         <x-stat-card label="Total Stations" :value="$stats['total_stations']" color="violet" icon="station" />
     </div>

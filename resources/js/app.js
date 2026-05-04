@@ -5,11 +5,20 @@ import Alpine from 'alpinejs';
 window.Alpine = Alpine;
 Alpine.start();
 
-// 1. Dark Mode Logic
+// 1. Dark Mode Logic - Load and persist preference
 (function() {
     const html = document.documentElement;
-    const toggle = document.getElementById('darkModeToggle');
+    
+    // Load dark mode preference on page load
+    const isDarkMode = localStorage.getItem('darkMode') === 'true';
+    if (isDarkMode) {
+        html.classList.add('dark');
+    } else {
+        html.classList.remove('dark');
+    }
 
+    // Toggle dark mode on button click
+    const toggle = document.getElementById('darkModeToggle');
     if (toggle) {
         toggle.addEventListener('click', () => {
             const isDark = html.classList.toggle('dark');

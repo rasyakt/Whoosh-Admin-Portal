@@ -1,12 +1,9 @@
-@props(['label', 'value', 'color' => 'blue', 'icon' => 'users'])
+@props(['label', 'value', 'color' => 'gray', 'icon' => 'users'])
 
 @php
+// Professional monochrome color scheme
 $bgColors = [
-    'blue' => 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400',
-    'emerald' => 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400',
-    'amber' => 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400',
-    'violet' => 'bg-violet-100 text-violet-700 dark:bg-violet-900/30 dark:text-violet-400',
-    'red' => 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400',
+    'gray' => 'bg-slate-100 text-slate-700 dark:bg-slate-800/50 dark:text-slate-300',
 ];
 
 $icons = [
@@ -16,17 +13,27 @@ $icons = [
     'station' => '<path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>',
 ];
 
-// Determine font size based on value length - more aggressive scaling for single line
-$valueLength = strlen($value);
-$fontSize = $valueLength > 15 ? 'text-lg' : ($valueLength > 10 ? 'text-xl' : ($valueLength > 6 ? 'text-2xl' : 'text-3xl'));
+// More aggressive font size scaling for single line display
+$valueLength = strlen(strip_tags($value));
+if ($valueLength > 18) {
+    $fontSize = 'text-base'; // 16px
+} elseif ($valueLength > 14) {
+    $fontSize = 'text-lg'; // 18px
+} elseif ($valueLength > 10) {
+    $fontSize = 'text-xl'; // 20px
+} elseif ($valueLength > 6) {
+    $fontSize = 'text-2xl'; // 24px
+} else {
+    $fontSize = 'text-3xl'; // 30px
+}
 @endphp
 
-<div class="bg-white dark:bg-[#1a1a2e] rounded-xl border border-gray-200 dark:border-white/10 p-6 shadow-sm">
-    <div class="flex items-center gap-3 mb-3">
-        <div class="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 {{ $bgColors[$color] ?? $bgColors['blue'] }}">
-            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">{!! $icons[$icon] ?? $icons['users'] !!}</svg>
+<div class="bg-white dark:bg-[#1a1a2e] rounded-xl border border-gray-200 dark:border-white/10 p-6 shadow-sm hover:shadow-md transition-shadow overflow-hidden">
+    <div class="flex items-center gap-3 mb-4">
+        <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 {{ $bgColors['gray'] }}">
+            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">{!! $icons[$icon] ?? $icons['users'] !!}</svg>
         </div>
-        <p class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">{{ $label }}</p>
+        <p class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider leading-tight">{{ $label }}</p>
     </div>
-    <p class="stat-value {{ $fontSize }} font-bold text-slate-900 dark:text-white whitespace-nowrap">{{ $value }}</p>
+    <p class="stat-value {{ $fontSize }} font-bold text-slate-900 dark:text-white whitespace-nowrap">{!! $value !!}</p>
 </div>

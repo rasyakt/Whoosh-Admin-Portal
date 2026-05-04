@@ -4,19 +4,19 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 mb-8">
         <div class="bg-white dark:bg-[#1a1a2e] rounded-xl border border-gray-200 dark:border-white/10 p-6 shadow-sm flex flex-col justify-center">
             <p class="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-1 uppercase tracking-wider">Today's Revenue</p>
-            <p class="text-3xl font-bold text-slate-900 dark:text-white">Rp {{ number_format($todayRevenue) }}</p>
+            <p class="text-2xl font-bold text-slate-900 dark:text-white whitespace-nowrap">Rp&nbsp;{{ number_format($todayRevenue) }}</p>
         </div>
         <div class="bg-white dark:bg-[#1a1a2e] rounded-xl border border-gray-200 dark:border-white/10 p-6 shadow-sm flex flex-col justify-center">
             <p class="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-1 uppercase tracking-wider">Weekly Revenue</p>
-            <p class="text-3xl font-bold text-slate-900 dark:text-white">Rp {{ number_format($weeklyRevenue) }}</p>
+            <p class="text-2xl font-bold text-slate-900 dark:text-white whitespace-nowrap">Rp&nbsp;{{ number_format($weeklyRevenue) }}</p>
         </div>
         <div class="bg-white dark:bg-[#1a1a2e] rounded-xl border border-gray-200 dark:border-white/10 p-6 shadow-sm flex flex-col justify-center">
             <p class="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-1 uppercase tracking-wider">Monthly Revenue</p>
-            <p class="text-3xl font-bold text-slate-900 dark:text-white">Rp {{ number_format($monthlyRevenue) }}</p>
+            <p class="text-2xl font-bold text-slate-900 dark:text-white whitespace-nowrap">Rp&nbsp;{{ number_format($monthlyRevenue) }}</p>
         </div>
         <div class="bg-white dark:bg-[#1a1a2e] rounded-xl border border-gray-200 dark:border-white/10 p-6 shadow-sm flex flex-col justify-center">
             <p class="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-1 uppercase tracking-wider">Total Revenue</p>
-            <p class="text-3xl font-bold text-emerald-600">Rp {{ number_format($totalRevenue) }}</p>
+            <p class="text-2xl font-bold text-emerald-600 whitespace-nowrap">Rp&nbsp;{{ number_format($totalRevenue) }}</p>
         </div>
     </div>
 

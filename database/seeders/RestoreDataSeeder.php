@@ -15,7 +15,7 @@ class RestoreDataSeeder extends Seeder
     {
         // Create Admin User
         AdminUser::create([
-            'name' => 'Super Admin',
+            'name' => 'Admin',
             'email' => 'admin@whoosh.com',
             'password' => Hash::make('password'),
             'role' => 'admin',
