@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AdminUser;
+use App\Services\ActivityLogger;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -40,11 +41,16 @@ class AuthController extends Controller
             ]
         ]);
 
+        ActivityLogger::log('User logged in successfully', $user, null, 'auth');
+
         return redirect()->route($user->role === 'manager' ? 'manager.dashboard' : 'admin.dashboard');
     }
 
     public function logout()
     {
+        if (session()->has('admin_user')) {
+            ActivityLogger::log('User logged out', null, null, 'auth');
+        }
         session()->forget('admin_user');
         return redirect()->route('login');
     }

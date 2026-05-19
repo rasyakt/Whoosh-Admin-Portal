@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\MobileUser;
+use App\Services\ActivityLogger;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -39,12 +40,14 @@ class UserController extends Controller
             'password' => 'required|min:6|confirmed',
         ]);
 
-        MobileUser::on('sqlsrv')->create([
+        $user = MobileUser::on('sqlsrv')->create([
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
             'password' => Hash::make($request->password),
         ]);
+
+        ActivityLogger::log("Created mobile user: {$user->email}", $user, $user->toArray(), 'users');
 
         return redirect()->route('admin.users.index')
             ->with('success', 'User created successfully.');
@@ -91,7 +94,13 @@ class UserController extends Controller
             $data['password'] = Hash::make($request->password);
         }
 
+        $oldData = $user->toArray();
         $user->update($data);
+
+        ActivityLogger::log("Updated mobile user: {$user->email}", $user, [
+            'old' => $oldData,
+            'new' => $data
+        ], 'users');
 
         return redirect()->route('admin.users.index')
             ->with('success', 'User updated successfully.');
@@ -100,7 +109,10 @@ class UserController extends Controller
     public function destroy(int $id)
     {
         $user = MobileUser::on('sqlsrv')->findOrFail($id);
+        $userData = $user->toArray();
         $user->delete();
+
+        ActivityLogger::log("Deleted mobile user: {$userData['email']}", null, $userData, 'users');
 
         return redirect()->route('admin.users.index')
             ->with('success', 'User deleted successfully.');

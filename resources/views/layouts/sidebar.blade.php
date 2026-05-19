@@ -43,6 +43,9 @@
             <x-sidebar-link href="{{ route('admin.users.index') }}" :active="request()->routeIs('admin.users.*')" icon="users">
                 Users
             </x-sidebar-link>
+            <x-sidebar-link href="{{ route('admin.activity-logs.index') }}" :active="request()->routeIs('admin.activity-logs.*')" icon="report">
+                Activity Logs
+            </x-sidebar-link>
         @endif
 
         @if($user->role === 'manager')
